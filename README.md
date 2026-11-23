@@ -9,7 +9,7 @@ Implementation boards of the 5G-MAG projects. The high-level roadmaps stay in [5
 
 ## Finding work
 
-The board views: Status (kanban), Release (what came with Rel-17, Rel-18, Rel-19, Rel-20), Feature (tasks under their feature), Function, and Ready to pick (Backlog, no assignee). The fields: Status, Type (Feature or Task), Part, Introduced in, Feature, Component (the function named by the specification), Document, Clause, Claimed by, Code repository (set by the audit) and Cases.
+The board views: Kanban (by Status), Ready to pick (Backlog, no assignee), Features and Tasks (tables: group them by Introduced in, to see what came with Rel-17, Rel-18, Rel-19 or Rel-20, or by Parent issue, to see the tasks under their feature, with the view menu). The fields: Status, Kind (Feature or Task), Part, Introduced in, Feature, Component (the function named by the specification), Document, Clause, Claimed by, Code repository (set by the audit) and Cases.
 
 ## Where the code is and how to build and test it
 
@@ -51,4 +51,4 @@ A function with no repository here (a standard function nobody has implemented y
 
 ## The board fields
 
-Status (the stages in AGENTS.md), Type (Feature or Task), Part, Introduced in, Feature, Component (the function the specification names), Document, Clause, Claimed by, Code repository (set by the audit) and Cases.
+Status (the stages in AGENTS.md), Kind (Feature or Task), Part, Introduced in, Feature, Component (the function the specification names), Document, Clause, Claimed by, Code repository (set by the audit) and Cases.
