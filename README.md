@@ -1,0 +1,54 @@
+# ProjectBoards
+
+Implementation boards of the 5G-MAG projects. The high-level roadmaps stay in [5G-MAG/Roadmaps](https://github.com/5G-MAG/Roadmaps).
+
+- **Boards:** 5GMS and MBS (user services and system), both public. More projects will follow.
+- **What is on a board:** features and tasks, drawn from the 3GPP specifications alone by the baseline workflow in [Standards2Deployments](https://github.com/5G-MAG/Standards2Deployments/tree/main/baseline). A **feature** is something the system offers, as it arrived in a release. A **task** is what one function must do for that feature in that release: the cases quoted from the specifications, how to read the full clause, and what has to be true for the card to move on. Tasks are sub-issues of their feature. Everything starts as Not audited: the code is read by the audit, not by the filing.
+- **Who moves the cards:** agents and people, by [the rules in AGENTS.md](AGENTS.md).
+- **Who creates issues:** 5G-MAG only. The repository limits issue creation to collaborators.
+
+## Finding work
+
+The board views: Status (kanban), Release (what came with Rel-17, Rel-18, Rel-19, Rel-20), Feature (tasks under their feature), Function, and Ready to pick (Backlog, no assignee). The fields: Status, Type (Feature or Task), Part, Introduced in, Feature, Component (the function named by the specification), Document, Clause, Claimed by, Code repository (set by the audit) and Cases.
+
+## Where the code is and how to build and test it
+
+The audit looks for the code of a function here, and a task is built here. Each public repository has a **recipe** in [`recipes/`](recipes/): how to build it, run its tests, run it, exercise a feature, and what the repository does not say (read from the repository's own files, every fact cites its file). Read the recipe first, then the repository's own README (and `AGENTS.md` or `CLAUDE.md` where present); the toolkit skill `3gpp-implement` does the same. The audit report names the repository it read. For a private repository, an audit report gives the test name as evidence, not a file and line.
+
+### 5GMS
+
+| Function | What it is | Repository | Language and build | Tests | Recipe |
+| --- | --- | --- | --- | --- | --- |
+| AF | 5GMS Application Function | [rt-5gms-application-function](https://github.com/5G-MAG/rt-5gms-application-function) | C, meson | `tests/` | [rt-5gms-application-function](recipes/rt-5gms-application-function.md) |
+| AS | 5GMS Application Server | [rt-5gms-application-server](https://github.com/5G-MAG/rt-5gms-application-server) | Python, pyproject | `tests/` | [rt-5gms-application-server](recipes/rt-5gms-application-server.md) |
+| Client: Media Session Handler | Android service that talks to the AF | [rt-5gms-media-session-handler](https://github.com/5G-MAG/rt-5gms-media-session-handler) | Kotlin, Gradle (`./gradlew`) | Gradle test tasks | [rt-5gms-media-session-handler](recipes/rt-5gms-media-session-handler.md) |
+| Client: Media Stream Handler | Android player side | [rt-5gms-media-stream-handler](https://github.com/5G-MAG/rt-5gms-media-stream-handler) | Kotlin, Gradle | Gradle test tasks | [rt-5gms-media-stream-handler](recipes/rt-5gms-media-stream-handler.md) |
+| Client: common library and application | Shared library and 5GMS-aware application | [rt-5gms-common-android-library](https://github.com/5G-MAG/rt-5gms-common-android-library), [rt-5gms-application](https://github.com/5G-MAG/rt-5gms-application) | Kotlin, Gradle | Gradle test tasks | [rt-5gms-common-android-library](recipes/rt-5gms-common-android-library.md)<br>[rt-5gms-application](recipes/rt-5gms-application.md) |
+| App Provider | 5GMS Application Provider | [rt-5gms-application-provider](https://github.com/5G-MAG/rt-5gms-application-provider) | Python, Docker | see its README | [rt-5gms-application-provider](recipes/rt-5gms-application-provider.md) |
+| Examples, mock AF | Docker set-up and an Express mock AF to exercise a feature | [rt-5gms-examples](https://github.com/5G-MAG/rt-5gms-examples) | JavaScript, Docker | exercise runs | [rt-5gms-examples](recipes/rt-5gms-examples.md) |
+
+### MBS (user services and system)
+
+| Function | What it is | Repository | Language and build | Tests | Recipe |
+| --- | --- | --- | --- | --- | --- |
+| MBSF | MBS Function (with the MBS Application Function) | [rt-mbs-function](https://github.com/5G-MAG/rt-mbs-function) | C++, meson | `meson test`, `tests/` | [rt-mbs-function](recipes/rt-mbs-function.md) |
+| MBSTF | MBS Transport Function | [rt-mbs-transport-function](https://github.com/5G-MAG/rt-mbs-transport-function) | C++, meson | `meson test`, `tests/` | [rt-mbs-transport-function](recipes/rt-mbs-transport-function.md) |
+| FLUTE | FLUTE protocol and profiles used by the MBSTF | [rt-libflute](https://github.com/5G-MAG/rt-libflute) | C++, CMake | `ctest`, `tests/` (has `AGENTS.md`) | [rt-libflute](recipes/rt-libflute.md) |
+| MBS Client | MBS client | rt-mbs-client (private) | see its README | see its README | none (private) |
+| MBS-Aware App | MBS-aware application | rt-mbs-application (private) | see its README | see its README | none (private) |
+| Provider | MBS Application Provider | rt-mbs-application-provider (private) | see its README | see its README | none (private) |
+| Examples | Docker set-up, mock media server, scripts to exercise a feature | [rt-mbs-examples](https://github.com/5G-MAG/rt-mbs-examples) | Shell, Docker | `test/` (has `CLAUDE.md`) | [rt-mbs-examples](recipes/rt-mbs-examples.md) |
+
+The system part names functions of the core network and the radio access network. Their reference code:
+
+| Function | Repository | Language and build | Recipe |
+| --- | --- | --- | --- |
+| Core network functions (AMF, SMF, UPF, NEF, PCF and the MB-SMF and MB-UPF) | [open5gs](https://github.com/5G-MAG/open5gs) | C, meson, `tests/` | none yet |
+| gNB | srsRAN_Project_mbs (private) | C++, CMake | none (private) |
+| UE | srsRAN_4G_mbs (private) | C++, CMake, CTest | none (private) |
+
+A function with no repository here (a standard function nobody has implemented yet) has none to build in: the audit says so, and the task starts from the specification.
+
+## The board fields
+
+Status (the stages in AGENTS.md), Type (Feature or Task), Part, Introduced in, Feature, Component (the function the specification names), Document, Clause, Claimed by, Code repository (set by the audit) and Cases.
