@@ -3,15 +3,15 @@
 # MBS). No repository was read to write it. A function that is not listed has no repository known on that board.
 
 repos:
-  rt-5gms-application-function: {role: 5GMS Application Function, build: 'C, meson', tests: "ABTS tests in `tests/msaf/`, built as `test-msaf` and registered in meson only when the open5gs subproject builds tests; the recipe found no documented command to run them and CI runs no unit tests"}
-  rt-5gms-application-server: {role: 5GMS Application Server, build: 'Python, pyproject', tests: "none: no unit-test framework (the recipe says so); `tests/` is a manual M3 client that drives a running AS. The build adds the first automated test and says how to run it"}
-  rt-5gms-media-session-handler: {role: Android Media Session Handler, build: 'Kotlin, Gradle', tests: "JUnit 4; the only unit test is a placeholder; no documented command to run one (the recipe)"}
+  rt-5gms-application-function: {role: 5GMS Application Function, build: 'C, meson', tests: "ABTS tests in `tests/msaf/`, built as `test-msaf` and registered in meson only when the open5gs subproject builds tests; the recipe found no documented command to run them and CI runs no unit tests; the first card documents the command it used"}
+  rt-5gms-application-server: {role: 5GMS Application Server, build: 'Python, pyproject', tests: "none: no unit-test framework (the recipe says so); `tests/` is a manual M3 client that drives a running AS. The first card adds the first automated test (for Python, pytest) and documents the command"}
+  rt-5gms-media-session-handler: {role: Android Media Session Handler, build: 'Kotlin, Gradle', tests: "JUnit 4; the only unit test is a placeholder; no documented command to run one (the recipe); the first card replaces it with real tests and documents the command"}
   rt-5gms-media-stream-handler: {role: Android Media Stream Handler (player side), build: 'Kotlin, Gradle', tests: "JUnit 4 with MockK and Robolectric in `app/src/test/`; see the recipe for what runs"}
   rt-5gms-common-android-library: {role: Shared Android library, build: 'Kotlin, Gradle', tests: "JUnit 4, 10 plain JVM tests in `app/src/test/`; no documented command to run them (the recipe)"}
   rt-5gms-application: {role: 5GMS-aware Android application, build: 'Kotlin, Gradle', tests: "JUnit 4: `./gradlew test` from `fivegmag_5GMSdAwareApplication/` (the recipe)"}
   rt-5gms-application-provider: {role: 5GMS Application Provider, build: 'Python, Docker', tests: "no unit tests; one pytest integration test in `management-ui/tests/` that needs a running UI and AF"}
   rt-5gms-examples: {role: Docker set-up and an Express mock AF, build: 'JavaScript, Docker', tests: "none; the examples are exercise runs"}
-  rt-mbs-function: {role: MBS Function (with the MBS Application Function), build: 'C++, meson', tests: "none runs today: the README names `meson test -C build regression` but no such suite is registered (both `test()` lines in `tests/meson.build` are commented out)"}
+  rt-mbs-function: {role: MBS Function (with the MBS Application Function), build: 'C++, meson', tests: "none runs today: the README names `meson test -C build regression` but no such suite is registered (both `test()` lines in `tests/meson.build` are commented out); the first card registers real tests in meson and documents the command"}
   rt-mbs-transport-function: {role: MBS Transport Function, build: 'C++, meson', tests: "`meson test -C build --suite rt-mbs-transport-function` (README); hand-written executables, no framework"}
   rt-libflute: {role: FLUTE library, build: 'C++, CMake', tests: "GoogleTest: `ctest --test-dir build/tests -R '^unit:' --output-on-failure` (CI)"}
   rt-mbs-examples: {role: 'Docker set-up, mock media server, scripts to exercise a feature', build: 'Shell, Docker', tests: "API tests against running functions: `pytest -v -s test_mbsf_crud.py` from `test/` (the recipe)"}
