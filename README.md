@@ -6,6 +6,8 @@ Implementation boards of the 5G-MAG projects. The high-level roadmaps stay in [5
 - **What is on a board:** features and tasks, drawn from the 3GPP specifications alone by the baseline workflow in [Standards2Deployments](https://github.com/5G-MAG/Standards2Deployments/tree/main/baseline). A **feature** is something the system offers, as it arrived in a release. A **task** is what one function must do for that feature in that release: the cases quoted from the specifications, how to read the full clause, and what has to be true for the card to move on. Tasks are sub-issues of their feature. A task is named **Feature: Function, Release N** (for example "Content hosting: Application Server (AS), Release 18"): there is one task for each feature, release and function, and the clauses it draws on are listed inside the card, not in its title. Functions that have only a few cases in a feature and release share one task, "other functions"; a task whose cases do not fit in one GitHub issue is cut at clause boundaries into parts ("part 1 of 2"). Everything starts as Not audited: the code is read by the audit, not by the filing.
 - **Who moves the cards:** agents and people, by [the rules in AGENTS.md](AGENTS.md).
 - **Who creates issues:** 5G-MAG only. The repository limits issue creation to collaborators.
+- **Who can read:** everyone, with no account: the cards, the boards and these files are public (how to read a card and list the open tasks through the web API is in [AGENTS.md](AGENTS.md)).
+- **Tests are required:** a card is not done without automated tests that carry the case ids, and where a repository has no test framework, adding one is part of the first card that touches it ([AGENTS.md](AGENTS.md#tests-are-required)).
 
 ## Finding work
 
