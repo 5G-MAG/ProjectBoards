@@ -19,9 +19,9 @@ The audit looks for the code of a function here, and a task is built here. Each 
 
 | Function | What it is | Repository | Language and build | Tests | Recipe |
 | --- | --- | --- | --- | --- | --- |
-| AF | 5GMS Application Function | [rt-5gms-application-function](https://github.com/5G-MAG/rt-5gms-application-function) | C, meson | `tests/` | [rt-5gms-application-function](recipes/rt-5gms-application-function.md) |
-| AS | 5GMS Application Server | [rt-5gms-application-server](https://github.com/5G-MAG/rt-5gms-application-server) | Python, pyproject | `tests/` | [rt-5gms-application-server](recipes/rt-5gms-application-server.md) |
-| Client: Media Session Handler | Android service that talks to the AF | [rt-5gms-media-session-handler](https://github.com/5G-MAG/rt-5gms-media-session-handler) | Kotlin, Gradle (`./gradlew`) | Gradle test tasks | [rt-5gms-media-session-handler](recipes/rt-5gms-media-session-handler.md) |
+| AF | 5GMS Application Function | [rt-5gms-application-function](https://github.com/5G-MAG/rt-5gms-application-function) | C, meson | ABTS in `tests/msaf/`; no documented run command | [rt-5gms-application-function](recipes/rt-5gms-application-function.md) |
+| AS | 5GMS Application Server | [rt-5gms-application-server](https://github.com/5G-MAG/rt-5gms-application-server) | Python, pyproject | none (`tests/` is a manual M3 client) | [rt-5gms-application-server](recipes/rt-5gms-application-server.md) |
+| Client: Media Session Handler | Android service that talks to the AF | [rt-5gms-media-session-handler](https://github.com/5G-MAG/rt-5gms-media-session-handler) | Kotlin, Gradle (`./gradlew`) | JUnit 4, placeholder test only | [rt-5gms-media-session-handler](recipes/rt-5gms-media-session-handler.md) |
 | Client: Media Stream Handler | Android player side | [rt-5gms-media-stream-handler](https://github.com/5G-MAG/rt-5gms-media-stream-handler) | Kotlin, Gradle | Gradle test tasks | [rt-5gms-media-stream-handler](recipes/rt-5gms-media-stream-handler.md) |
 | Client: common library and application | Shared library and 5GMS-aware application | [rt-5gms-common-android-library](https://github.com/5G-MAG/rt-5gms-common-android-library), [rt-5gms-application](https://github.com/5G-MAG/rt-5gms-application) | Kotlin, Gradle | Gradle test tasks | [rt-5gms-common-android-library](recipes/rt-5gms-common-android-library.md)<br>[rt-5gms-application](recipes/rt-5gms-application.md) |
 | App Provider | 5GMS Application Provider | [rt-5gms-application-provider](https://github.com/5G-MAG/rt-5gms-application-provider) | Python, Docker | see its README | [rt-5gms-application-provider](recipes/rt-5gms-application-provider.md) |
@@ -31,7 +31,7 @@ The audit looks for the code of a function here, and a task is built here. Each 
 
 | Function | What it is | Repository | Language and build | Tests | Recipe |
 | --- | --- | --- | --- | --- | --- |
-| MBSF | MBS Function (with the MBS Application Function) | [rt-mbs-function](https://github.com/5G-MAG/rt-mbs-function) | C++, meson | `meson test`, `tests/` | [rt-mbs-function](recipes/rt-mbs-function.md) |
+| MBSF | MBS Function (with the MBS Application Function) | [rt-mbs-function](https://github.com/5G-MAG/rt-mbs-function) | C++, meson | none registered today (see the recipe) | [rt-mbs-function](recipes/rt-mbs-function.md) |
 | MBSTF | MBS Transport Function | [rt-mbs-transport-function](https://github.com/5G-MAG/rt-mbs-transport-function) | C++, meson | `meson test`, `tests/` | [rt-mbs-transport-function](recipes/rt-mbs-transport-function.md) |
 | FLUTE | FLUTE protocol and profiles used by the MBSTF | [rt-libflute](https://github.com/5G-MAG/rt-libflute) | C++, CMake | `ctest`, `tests/` (has `AGENTS.md`) | [rt-libflute](recipes/rt-libflute.md) |
 | MBS Client | MBS client | rt-mbs-client (private) | see its README | see its README | none (private) |
