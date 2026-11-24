@@ -36,6 +36,8 @@ Everything is drawn from the specifications alone (through the 3gpp-toolkit) and
 
 A code reading is not a run. Say in the report which cases you also ran, and which you only read.
 
+When the card names no repository for the function (the board README and `code.yaml` list none), there is no code to read: post the report with `Code: none, no repository for <function>`, give every case the verdict Absent with the evidence "no repository", and set Backlog. Do not invent a repository; a person decides where the code lives. When a repository has no test framework (its recipe says so), a case has no existing test to cite: the evidence is the source line, and the build adds the first test and says how to run it.
+
 ### The audit report
 
 One comment on the issue, in this form. It is what the Website reads for the case table of this requirement.
