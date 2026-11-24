@@ -47,6 +47,37 @@ The system part names functions of the core network and the radio access network
 | gNB | srsRAN_Project_mbs (private) | C++, CMake | none (private) |
 | UE | srsRAN_4G_mbs (private) | C++, CMake, CTest | none (private) |
 
+### 5G Broadcast (LTE-based, TV and radio services and Emergency Alerts)
+
+Read from the Website's pages for these tools; the repositories have no recipe yet because they were not read for this board. The audit and the first pull request add the build and test facts.
+
+| Function | What it is | Repository |
+| --- | --- | --- |
+| E-UTRAN (eNB) | Transmitter: an srsRAN-based eNodeB with FeMBMS; no M2 interface and no MCE | [rt-mbms-tx](https://github.com/5G-MAG/rt-mbms-tx), [rt-mbms-tx-for-qrd-and-crd](https://github.com/5G-MAG/rt-mbms-tx-for-qrd-and-crd) (also the eNodeB of Emergency Alerts) |
+| MBMS-GW | MBMS gateway | [rt-mbms-gw](https://github.com/5G-MAG/rt-mbms-gw) |
+| BM-SC | Broadcast Multicast Service Centre | [rt-mbms-bmsc](https://github.com/5G-MAG/rt-mbms-bmsc) |
+| UE | Receiver modem | [rt-mbms-modem](https://github.com/5G-MAG/rt-mbms-modem) |
+| MBMS Client | FLUTE reassembly, service announcement, HTTP | [rt-mbms-client](https://github.com/5G-MAG/rt-mbms-client) |
+| MBMS Application | Monitoring application, and the PWS client of Emergency Alerts | [rt-mbms-application](https://github.com/5G-MAG/rt-mbms-application) |
+| Content Provider | xMB-C client and SBc-AP origination | [rt-mbms-application-provider](https://github.com/5G-MAG/rt-mbms-application-provider) |
+| FLUTE | FLUTE library | [rt-libflute](https://github.com/5G-MAG/rt-libflute) ([recipe](recipes/rt-libflute.md)) |
+| CBC, PWS | Cell Broadcast Centre (Emergency Alerts) | [rt-pws-cbc](https://github.com/5G-MAG/rt-pws-cbc) |
+| Examples | Examples for 5G Broadcast | [rt-mbms-examples](https://github.com/5G-MAG/rt-mbms-examples) |
+
+The MME and the MCE have no repository.
+
+### RTC (5G-RTC and SWAP)
+
+There is no dedicated RTC tool yet. The only code is [rt-3gpp-swap](https://github.com/5G-MAG/rt-3gpp-swap): the SWAP reference implementation (a Node.js signalling server and a client library), which stands for the WebRTC Signalling Function. The RTC Application Provider, RTC AF and AS, Media Session Handler, Access Function, ICE function and the others have no repository: a task for them starts from the specification, with mocks for the peers.
+
+### Which repository a card names
+
+Each task card carries a block "Where to build, test and exercise" with the repositories of its functions. It is written from [`code.yaml`](code.yaml) (this README's tables, the recipes and the Website's pages; no repository is read to write it). A function that `code.yaml` does not list has no repository known on that board.
+
+## Tools, and how to read a card
+
+The commands `3gpp-clause`, `3gpp-implement` and `3gpp-verify` come from the [3gpp-toolkit](https://github.com/5G-MAG/Standards2Deployments/tree/main/3gpp-toolkit): `git clone https://github.com/5G-MAG/Standards2Deployments.git`, then `./setup.sh` in `3gpp-toolkit/`. Read a card with `gh issue view <number> -R 5G-MAG/ProjectBoards --json title,body,labels,state,assignees` (the plain form can fail with a Projects (classic) error on some versions of `gh`) or `gh api repos/5G-MAG/ProjectBoards/issues/<number>`. Pull requests go against the branch the recipe of the repository names under Conventions for contributors (for most 5G-MAG repositories `development`); the audit reads `main`.
+
 A function with no repository here (a standard function nobody has implemented yet) has none to build in: the audit says so, and the task starts from the specification.
 
 ## The board fields
