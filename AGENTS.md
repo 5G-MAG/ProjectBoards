@@ -5,6 +5,8 @@ Agents of several people move the cards on the 5G-MAG boards. People can follow 
 - **Feature**: something the system offers (for example "Object Repair mechanism for FLUTE"), as it arrived in a release. It says what the feature is, where the specifications describe it, which Work Items and functions are involved. It has no cases of its own and is not worked on directly: it is Supported when all its tasks are, and the sync tool sets that.
 - **Task**: the cases one function must meet for one feature in one release, quoted from the specifications. This is what you claim and move. Each task is a sub-issue of its feature.
 
+Read a card with `gh issue view <number> -R 5G-MAG/ProjectBoards --json title,body,labels,state,assignees` (the plain form can fail on some versions of `gh`). Where the code is, and how to install the toolkit, is in [README.md](README.md#where-the-code-is-and-how-to-build-and-test-it).
+
 Everything is drawn from the specifications alone (through the 3gpp-toolkit) and starts as Not audited. The board column (Status) says where a task stands; the field Introduced in says the release its cases came with, so "what is new in Rel-19" is a filter.
 
 ## The statuses, and who may move a card
@@ -39,7 +41,7 @@ A code reading is not a run. Say in the report which cases you also ran, and whi
 One comment on the issue, in this form. It is what the Website reads for the case table of this requirement.
 
 ````
-Audit of #<issue>, <specification> <version> clause <x.y.z>, component <AF|AS|Client|App Provider>
+Audit of #<issue>, <specification> <version> clause <x.y.z>, function <the function the card names>
 Code: <repository>@<commit> (main), read on <date>. Run or read only: <which>.
 
 | Case id | Verdict | What the code does | Evidence |
@@ -55,7 +57,8 @@ Evidence is the file and line (or the test) in a public 5G-MAG repository. For a
 
 - **lead-in**: a sentence that ends with a colon and only introduces the cases under it. It has no test of its own and is not ticked.
 - **describes**: the specification states behaviour as a fact. Test the observable it implies, and write that observable in the test's first line.
-- **may**: optional. Implement it only if the feature needs it; otherwise report it Not applicable (optional). It never stops a card from reaching Supported.
+- **may**: optional. Implement it only if the feature needs it; otherwise report it Not applicable (optional). It counts as ticked and never stops a card from reaching Supported. A `may` case you do implement has a test like any other.
+- **Function column**: the function the sentence names. A sentence that falls on a peer (a consumer, a client, a provider, the other side of an interface) is not this function's duty: report it Not applicable, with the clause, and do not build it here.
 
 ## Build (Backlog)
 
@@ -63,7 +66,7 @@ Evidence is the file and line (or the test) in a public 5G-MAG repository. For a
 2. Read the whole issue and the audit report. Implement each case that is Absent or Differs, in the repository named in the audit report, with one test per case.
 3. Exercise the feature as the issue says (the flow of the clause, between the function and its peers, against the reference implementations or mocks) and attach the log and the messages exchanged to the pull request.
 4. Open the pull request, link the issue, quote each clause as `Basis: <specification> <version> clause <x.y.z>: "<sentence>"`, name the test that covers each case, run `3gpp-verify --commits <base>..HEAD --strict`, and set the Status to In review.
-5. When it is merged, set the Status to Verifying.
+5. When it is merged, set the Status to Verifying. The pull request goes against the branch the recipe of the repository names under Conventions for contributors (for most 5G-MAG repositories `development`); the audit reads `main`.
 
 ## Claims
 
@@ -71,7 +74,7 @@ Several people run agents on the same board, so a claim says whose it is. Assign
 
 ## Cross-check (Verifying)
 
-Someone other than the author of the code or of the audit report does this; where possible an agent run by a different person. Re-read each case against the clause at the pinned version. Run the named tests on the base and the head commit and check that each fails without the change and passes with it; for a case the audit found Implemented, check the evidence in the report and run the existing tests that cover it. Run `3gpp-verify --commits <base>..HEAD --strict` on the pull request, if there is one. Then tick the cases in the issue, post the verification report, set the Status to Supported and close the issue. If a case does not hold, comment why and set the Status back to In progress (or Backlog if nobody is building it).
+Someone other than the author of the code or of the audit report does this; where possible an agent run by a different person. Re-read each case against the clause at the pinned version. Run the named tests on the base and the head commit and check that each fails without the change and passes with it; for a case the audit found Implemented, check the evidence in the report and run the existing tests that cover it. Run `3gpp-verify --commits <base>..HEAD --strict` on the pull request, if there is one. Then tick the cases in the issue (a `may` case that nobody implements counts as ticked when it is reported Not applicable (optional)), post the verification report, set the Status to Supported and close the issue. If a case does not hold, comment why and set the Status back to In progress (or Backlog if nobody is building it).
 
 ### The verification report
 
